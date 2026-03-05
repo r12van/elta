@@ -1,107 +1,130 @@
-# 🚀 E-Kinerja IT - Sistem Pelaporan Kinerja Tenaga Ahli
+﻿# E-Kinerja IT
+
+Sistem pelaporan kinerja harian tenaga ahli (PJLP) Disgulkarmat Provinsi DKI Jakarta.
 
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
-![PHPWord](https://img.shields.io/badge/PHPWord-4F5B93?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![PHPWord](https://img.shields.io/badge/PHPWord-777BB4?style=for-the-badge&logo=php&logoColor=white)
 
-**E-Kinerja IT** adalah aplikasi *Human Resource Information System* (HRIS) skala mini yang dirancang khusus untuk Tenaga Ahli (PJLP) di Dinas Penanggulangan Kebakaran dan Penyelamatan (Disgulkarmat) Provinsi DKI Jakarta. 
+## Deskripsi
 
-Aplikasi ini mengotomatiskan proses pencatatan kegiatan harian, manajemen kontrak kerja, kalkulasi cuti, hingga **Generate Laporan Bulanan Microsoft Word (.docx)** secara dinamis sesuai standar instansi. Say goodbye to *copy-paste* laporan manual! 👋
+**E-Kinerja IT** adalah aplikasi HRIS mini untuk mengelola:
 
----
+- Pencatatan kegiatan harian
+- Manajemen kontrak kerja
+- Pengajuan dan perhitungan cuti
+- Generate laporan bulanan Microsoft Word (`.docx`)
 
-## ✨ Fitur Unggulan
+## Fitur Utama
 
-- 📄 **Auto-Generate Laporan Word**: Menyusun rekap kegiatan harian lengkap dengan tabel target, realisasi, dan lampiran foto ke dalam format `.docx` siap cetak.
-- 🔐 **Role-Based Access Control (RBAC)**: Pemisahan hak akses antara **Admin** (Kelola Master Data & Kontrak) dan **Pegawai** (Input Kegiatan & Cetak Laporan).
-- 📅 **Manajemen Kontrak (History)**: Mendukung sistem multi-kontrak (Contoh: Tahap 1 & Tahap 2) dengan tanggal berlaku yang otomatis mengatur status kepegawaian.
-- 🏖️ **Smart Leave Calculator (Cuti)**: Sistem pengajuan cuti otomatis yang terintegrasi dengan jatah kontrak tahunan. Cuti yang diajukan otomatis masuk ke Laporan Harian!
-- 📊 **Dashboard Interaktif**: Visualisasi data produktivitas menggunakan Chart.js dan ringkasan sisa cuti secara *real-time*.
-- 📱 **Responsive & Aesthetic UI**: Dibangun dengan Tailwind CSS untuk tampilan yang bersih, modern, dan nyaman diakses lewat HP maupun PC.
+- Auto-generate laporan Word lengkap dengan data aktivitas
+- Role-based access (`Admin` dan `Pegawai`)
+- Riwayat kontrak multi-tahap
+- Kalkulasi cuti terintegrasi dengan laporan
+- Dashboard interaktif berbasis Chart.js
+- UI responsif (mobile dan desktop)
 
----
+## Screenshot Aplikasi
 
-## 📸 *Screenshots*
-*(Tambahkan screenshot aplikasimu di sini nanti)*
-- **Landing Page**
-- **Dashboard Pegawai**
-- **Form Laporan Harian**
-- **Hasil Cetak MS. Word**
+<table>
+  <tr>
+    <td align="center"><strong>Landing Page</strong></td>
+    <td align="center"><strong>Dashboard Pegawai</strong></td>
+  </tr>
+  <tr>
+    <td><img src="public/screenshot/landing.png" alt="Landing Page"></td>
+    <td><img src="public/screenshot/dashboard.png" alt="Dashboard Pegawai"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Halaman Cuti</strong></td>
+    <td align="center"><strong>Profil Pengguna</strong></td>
+  </tr>
+  <tr>
+    <td><img src="public/screenshot/leave.png" alt="Halaman Cuti"></td>
+    <td><img src="public/screenshot/profile.png" alt="Profil Pengguna"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Hasil Laporan</strong></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><img src="public/screenshot/report.png" alt="Hasil Laporan"></td>
+    <td></td>
+  </tr>
+</table>
 
----
+## Prasyarat
 
-## 🛠️ Prasyarat (Prerequisites)
+Pastikan environment sudah memiliki:
 
-Sebelum melakukan instalasi, pastikan sistem Anda sudah ter-install:
-- PHP ^8.1
+- PHP 8.1+
 - Composer
-- Node.js & NPM
-- MySQL / MariaDB
+- Node.js dan npm
+- MySQL atau MariaDB
 
----
+## Instalasi
 
-## ⚙️ Panduan Instalasi (Installation)
+1. Clone repository
 
-Ikuti langkah-langkah berikut untuk menjalankan aplikasi di komputer lokal:
+```bash
+git clone https://github.com/jasinfo113/laporan.git
+cd e-kinerja-it
+```
 
-**1. Clone Repository**
+2. Install dependensi
 
-    git clone [https://github.com/username-kamu/e-kinerja-it.git](https://github.com/username-kamu/e-kinerja-it.git)
-    cd e-kinerja-it
+```bash
+composer install
+npm install
+```
 
-**2. Install Dependensi Backend & Frontend**
+3. Setup environment
 
-    composer install
-    npm install
+```bash
+cp .env.example .env
+```
 
-**3. Setup Environment**
+Lalu atur `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` pada file `.env`.
 
-Duplikat file konfigurasi dan sesuaikan kredensial database Anda:
+4. Generate app key
 
-    cp .env.example .env
+```bash
+php artisan key:generate
+```
 
-*(Buka file .env dan atur DB_DATABASE, DB_USERNAME, dan DB_PASSWORD)*
+5. Migrasi dan seed database
 
-**4. Generate Application Key**
+```bash
+php artisan migrate:fresh --seed
+```
 
-    php artisan key:generate
+6. Link storage
 
-**5. Migrasi Database & Seeding (PENTING)**
+```bash
+php artisan storage:link
+```
 
-Perintah ini akan membangun struktur database dan mengisinya dengan data dummy lengkap (termasuk akun Admin & Pegawai).
+7. Build asset dan jalankan server
 
-    php artisan migrate:fresh --seed
+```bash
+npm run build
+php artisan serve
+```
 
-**6. Tautkan Storage (Untuk Upload Foto)**
+Akses aplikasi di `http://localhost:8000`.
 
-    php artisan storage:link
+## Akun Default
 
-**7. Compile Asset Tailwind & Jalankan Server**
-
-    npm run build
-    php artisan serve
-
-Aplikasi sekarang dapat diakses melalui `http://localhost:8000`. 🎉
-
----
-
-## 🔑 Default Login Credentials
-
-Gunakan akun berikut untuk mencoba aplikasi (hasil dari Database Seeder):
-
-**1. Akun Administrator (HRD/Pejabat)**
+### Admin
 - Email: `admin@pemadam.jakarta.go.id`
 - Password: `password`
 
-**2. Akun Pegawai (Tenaga Ahli)**
+### Pegawai
 - Email: `rizvan@pemadam.jakarta.go.id`
 - Password: `password`
 
----
+## Pengembang
 
-## 👨‍💻 Dikembangkan Oleh
-**Rizvan Primadita, S.T.** *Tenaga Ahli Web Programmer - Disgulkarmat Provinsi DKI Jakarta*
-
----
-*Dibuat dengan ☕ dan ❤️ menggunakan Laravel.*
+**Rizvan Primadita, S.T.**  
+Tenaga Ahli Web Programmer - Disgulkarmat Provinsi DKI Jakarta
