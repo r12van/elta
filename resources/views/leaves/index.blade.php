@@ -1,0 +1,73 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Riwayat Cuti Tahunan</h2>
+    </x-slot>
+
+    <div class="py-12"><div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+        @if (session('success'))
+            <div class="mb-4 bg-emerald-100 border border-emerald-400 text-emerald-700 px-4 py-3 rounded relative">
+                {{ session('success') }}
+            </div>
+        @elseif (session('error'))
+            <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-blue-100 text-blue-600 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-blue-900">Informasi Sisa Cuti Tahun {{ $tahunSekarang }}</p>
+                    <p class="text-xs text-blue-700">Pastikan sisa cuti kamu mencukupi sebelum mengajukan.</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <span class="block text-2xl font-extrabold text-blue-700">{{ $sisaCuti }}</span>
+                <span class="block text-[10px] font-bold uppercase text-blue-500">HARI</span>
+            </div>
+        </div>
+
+        <div class="mb-4 flex justify-end">
+            <a href="{{ route('leaves.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Ajukan Cuti Baru
+            </a>
+        </div>
+
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="px-4 py-3 font-bold text-gray-600">Tanggal Cuti</th>
+                            <th class="px-4 py-3 font-bold text-gray-600">Keterangan</th>
+                            <th class="px-4 py-3 font-bold text-gray-600 w-24">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @forelse($leaves as $leave)
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-4 py-3 font-semibold text-gray-800">{{ \Carbon\Carbon::parse($leave->tanggal_cuti)->locale('id')->isoFormat('dddd, D MMMM Y') }}</td>
+                            <td class="px-4 py-3 text-gray-600">{{ $leave->keterangan }}</td>
+                            <td class="px-4 py-3">
+                                <form action="{{ route('leaves.destroy', $leave->id) }}" method="POST" onsubmit="return confirm('Yakin ingin membatalkan cuti ini? Saldo cuti akan dikembalikan.');">
+                                    @csrf @method('DELETE')
+                                    <button class="text-red-500 hover:text-red-700 font-bold text-sm bg-red-50 hover:bg-red-100 py-1.5 px-3 rounded transition-colors">Batal</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="px-4 py-8 text-center text-gray-400">Belum ada riwayat pengajuan cuti.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div></div>
+</x-app-layout>
