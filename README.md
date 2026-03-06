@@ -1,4 +1,4 @@
-﻿# E-Laporan Tenaga Ahli (ELTA)
+﻿# eLTA - elektronik Laporan Tenaga Ahli
 
 Sistem pelaporan kinerja harian tenaga ahli Disgulkarmat Provinsi DKI Jakarta.
 
@@ -9,7 +9,7 @@ Sistem pelaporan kinerja harian tenaga ahli Disgulkarmat Provinsi DKI Jakarta.
 
 ## Deskripsi
 
-**E-Laporan Tenaga Ahli (ELTA)** adalah aplikasi yang digunakan untuk mengelola:
+**eLTA - elektronik Laporan Tenaga Ahli** adalah aplikasi yang digunakan untuk mengelola:
 
 - Pencatatan kegiatan harian
 - Manajemen kontrak kerja
@@ -129,3 +129,4 @@ Akses aplikasi di `http://localhost:8000`.
 **Rizvan Primadita** ![Static Badge](https://img.shields.io/badge/my_github-da2724?style=for-the-badge&logo=git&logoColor=299bd3&link=https%3A%2F%2Fgithub.com%2Fr12van)
 
 Tenaga Ahli Web Programmer - Disgulkarmat Provinsi DKI Jakarta
+
