@@ -69,9 +69,21 @@ class ContractController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Contract $contract)
     {
-        //
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'job_package_id' => 'required|exists:job_packages,id',
+            'nama_kontrak' => 'required|string',
+            'jabatan' => 'required|string',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+            'kuota_cuti' => 'required|integer|min:0'
+        ]);
+
+        $contract->update($request->all());
+
+        return redirect()->route('contracts.index')->with('success', 'Data kontrak berhasil diperbarui!');
     }
 
     /**

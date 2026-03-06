@@ -19,10 +19,14 @@
                     </td>
                     <td class="border px-4 py-2 text-sm">{{ \Carbon\Carbon::parse($c->tanggal_mulai)->format('d M Y') }} s/d {{ \Carbon\Carbon::parse($c->tanggal_selesai)->format('d M Y') }}</td>
                     <td class="border px-4 py-2">
-                        <form action="{{ route('contracts.destroy', $c->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?');">
-                            @csrf @method('DELETE')
-                            <button class="text-red-600 font-bold">Hapus</button>
-                        </form>
+                        <div class="flex items-center gap-3">
+                            <a href="{{ route('contracts.edit', $c->id) }}" class="text-blue-600 hover:text-blue-800 font-bold text-sm bg-blue-50 py-1 px-3 rounded">Edit</a>
+
+                            <form action="{{ route('contracts.destroy', $c->id) }}" method="POST" onsubmit="return confirm('Yakin hapus kontrak ini?');">
+                                @csrf @method('DELETE')
+                                <button class="text-red-600 hover:text-red-800 font-bold text-sm bg-red-50 py-1 px-3 rounded">Hapus</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
