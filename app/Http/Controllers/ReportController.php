@@ -103,7 +103,7 @@ class ReportController extends Controller
             }
 
             // 1. Panggil file template
-            $templatePath = storage_path('app/templates/template_laporan.docx');
+            $templatePath = resource_path('templates/template_laporan.docx');
             if (!file_exists($templatePath)) {
                 return back()->with('error', 'File template_laporan.docx tidak ditemukan di folder templates!');
             }
